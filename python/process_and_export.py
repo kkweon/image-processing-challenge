@@ -19,12 +19,12 @@ def threshold(voxels, cutoff):
     return thresholded
 
 
-def write_slices_as_pngs(path, voxels):
+def write_slices_as_pngs(path: str, voxels: float) -> bool:
     '''
     Write the axial slices of the CT scan to individual png files.
     For file names, you can simply number the slices.
     '''
-    return None
+    return False
 
 
 if __name__ == "__main__":
