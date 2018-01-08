@@ -1,8 +1,11 @@
-from numpy.testing import assert_array_almost_equal
-from process_and_export import rescale, threshold
+from datetime import datetime
 
-from threshold import threshold_cpp
 import numpy as np
+import pytest
+from numpy.testing import assert_array_almost_equal
+
+from process_and_export import rescale, threshold
+from threshold import threshold_cpp
 
 
 def test_rescale_shrink():
@@ -22,3 +25,20 @@ def test_cpp_function():
     cutoff = 0.5
     assert_array_almost_equal(
         threshold(image, cutoff), threshold_cpp(image, cutoff))
+
+
+#@pytest.mark.xfail
+def test_cpp_function_should_be_faster():
+    def timeit(func):
+        beg = datetime.now()
+        func()
+        end = datetime.now()
+        return end - beg
+
+    image = np.random.randn(128, 128, 128)
+    cutoff = 0.5
+
+    python_fn = lambda: threshold(image, cutoff)
+    cpp_fn = lambda: threshold_cpp(image, cutoff)
+
+    assert timeit(python_fn) > timeit(cpp_fn)
