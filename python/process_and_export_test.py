@@ -21,6 +21,7 @@ def test_rescale_shrink_and_shift():
 
 
 def test_cpp_function():
+    """Make sure the CPP implemented version works same as Python version"""
     image = np.random.randn(32, 32, 32)
     cutoff = 0.5
     assert_array_almost_equal(
