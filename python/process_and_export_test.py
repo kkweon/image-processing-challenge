@@ -5,7 +5,7 @@ import pytest
 from numpy.testing import assert_array_almost_equal
 
 from process_and_export import rescale, threshold
-from threshold import threshold_cpp
+from threshold import threshold_cpp_ptr as threshold_cpp
 
 
 def test_rescale_shrink():

@@ -6,7 +6,7 @@ from PIL import Image
 from dicom_import import dicom_datasets_from_zip, combine_slices
 
 try:
-    from threshold import threshold_cpp
+    from threshold import threshold_cpp_ptr as threshold_cpp
 except:
     raise ImportError("Please run `make cython` to build dependencies")
 
