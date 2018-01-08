@@ -27,7 +27,7 @@ def test_cpp_function():
         threshold(image, cutoff), threshold_cpp(image, cutoff))
 
 
-#@pytest.mark.xfail
+@pytest.mark.xfail
 def test_cpp_function_should_be_faster():
     def timeit(func):
         beg = datetime.now()
