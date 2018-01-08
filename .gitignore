@@ -8,3 +8,4 @@ build
 *.so
 .cache
 exported
+.DS_Store

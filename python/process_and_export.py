@@ -8,7 +8,7 @@ from dicom_import import dicom_datasets_from_zip, combine_slices
 try:
     from threshold import threshold_cpp
 except:
-    pass
+    raise ImportError("Please run `make cython` to build dependencies")
 
 
 def rescale(image, output_min=0.0, output_max=1.0):
@@ -63,7 +63,19 @@ if __name__ == "__main__":
         type=str,
         dest="FILE",
         help="Path to lung ct zip file")
+
+    parser.add_argument(
+        "--dest",
+        default="exported",
+        type=str,
+        dest="DEST",
+        help="Destination directory to save PNG files")
     flags = parser.parse_args()
+
+    if not os.path.exists(flags.FILE):
+        raise FileNotFoundError(
+            "{} is not found. Please run `make download` to download data".
+            format(flags.FILE))
 
     with zipfile.ZipFile(flags.FILE, 'r') as f:
         dicom_datasets = dicom_datasets_from_zip(f)
@@ -74,6 +86,9 @@ if __name__ == "__main__":
     voxels_normalized = rescale(voxels_float, 0.0, 1.0)
     voxels_thresholded = threshold(voxels_normalized, cutoff=0.4, use_cpp=True)
 
-    ret = write_slices_as_pngs('exported', voxels_thresholded)
+    ret = write_slices_as_pngs(flags.DEST, voxels_thresholded)
     if not ret:
-        print("Failed to write")
+        print("[FAIL] couldn't write png files")
+    else:
+        print("[Success] output files are located in {} directories".format(
+            flags.DEST))
