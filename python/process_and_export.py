@@ -52,26 +52,8 @@ def write_slices_as_pngs(path: str, voxels: np.ndarray) -> bool:
         return False
 
 
-if __name__ == "__main__":
-    # Flags
-    import argparse
-    parser = argparse.ArgumentParser(
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument(
-        "--file",
-        default="./data/example-lung-ct.zip",
-        type=str,
-        dest="FILE",
-        help="Path to lung ct zip file")
-
-    parser.add_argument(
-        "--dest",
-        default="exported",
-        type=str,
-        dest="DEST",
-        help="Destination directory to save PNG files")
-    flags = parser.parse_args()
-
+def main(flags):
+    """Main Function"""
     if not os.path.exists(flags.FILE):
         raise FileNotFoundError(
             "{} is not found. Please run `make download` to download data".
@@ -92,3 +74,25 @@ if __name__ == "__main__":
     else:
         print("[Success] output files are located in {} directories".format(
             flags.DEST))
+
+
+if __name__ == "__main__":
+    # Flags
+    import argparse
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument(
+        "--file",
+        default="./data/example-lung-ct.zip",
+        type=str,
+        dest="FILE",
+        help="Path to lung ct zip file")
+
+    parser.add_argument(
+        "--dest",
+        default="exported",
+        type=str,
+        dest="DEST",
+        help="Destination directory to save PNG files")
+    flags = parser.parse_args()
+    main(flags)
