@@ -6,6 +6,7 @@ cython:
 test:
 	pytest
 
+download:	SHELL:=/bin/bash
 download:
 	@if [[ -f "data/example-lung-ct.zip" ]]; then																													\
 		echo "Data file already exists";																																		\
