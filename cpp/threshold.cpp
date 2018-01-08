@@ -1,5 +1,7 @@
 #include "threshold.hpp"
 
+using std::size_t;
+
 Tensor3B threshold(const Tensor3D& tensor, double cutoff) {
   size_t height = tensor.size();
   if (!height) return Tensor3B();
@@ -11,7 +13,7 @@ Tensor3B threshold(const Tensor3D& tensor, double cutoff) {
   if (!depth) return Tensor3B();
 
   Tensor3B mask(height,
-                vector<vector<bool>>(width, vector<bool>(depth, false)));
+                vector<vector<bool> >(width, vector<bool>(depth, false)));
 
   for (size_t h = 0; h < tensor.size(); ++h)
     for (size_t w = 0; w < tensor[h].size(); ++w)
@@ -24,7 +26,7 @@ Tensor3B threshold(const Tensor3D& tensor, double cutoff) {
 Tensor3B threshold_use_ptr(
     double* tensor, int height, int width, int depth, double cutoff) {
   Tensor3B mask(height,
-                vector<vector<bool>>(width, vector<bool>(depth, false)));
+                vector<vector<bool> >(width, vector<bool>(depth, false)));
 
   for (int h = 0; h < height; ++h)
     for (int w = 0; w < width; ++w)
