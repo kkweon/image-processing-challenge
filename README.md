@@ -5,32 +5,31 @@
 ### With docker
 
 ```bash
-docker build . -t inno && docker run --rm inno
+docker-compose up
 ```
 
 ### Without docker
 
 1. Install dependencies
-   ```
-   pip install -r requirements.txt
-   ```
-
+    ```bash
+    pip install -r requirements.txt
+    ```
 1. Download dataset
-  ```
-  make download
-  ```
+    ```bash
+    make download
+    ```
 1. Build Cython
-  ```
-  make cython
-  ```
+    ```bash
+    make cython
+    ```
 1. (optional) Run Test
-  ```
-  make test
-  ```
+    ```bash
+    make test
+    ```
 1. Run (export CT image to exported directory)
-  ```
-  make run
-  ```
+    ```bash
+    make run
+    ```
 
 
 ## Tasks to complete
