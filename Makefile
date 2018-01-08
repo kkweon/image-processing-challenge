@@ -20,7 +20,7 @@ run:
 
 clean:
 	rm -f *.so python/*.so python/*.cpp
-	rm -rf exported
+	rm -rf exported python/__pycache__
 
 cleaner: clean
 	rm -rf data
