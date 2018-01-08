@@ -7,8 +7,12 @@ test:
 	pytest
 
 download:
-	mkdir -p data
-	wget -O data/example-lung-ct.zip https://s3-us-west-1.amazonaws.com/innolitics/example-lung-ct.zip
+	@if [[ -f "data/example-lung-ct.zip" ]]; then																													\
+		echo "Data file already exists";																																		\
+	else																																																	\
+		mkdir -p data;																																											\
+		wget -O data/example-lung-ct.zip https://s3-us-west-1.amazonaws.com/innolitics/example-lung-ct.zip;	\
+	fi
 
 run:
 	python python/process_and_export.py

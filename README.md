@@ -2,6 +2,14 @@
 
 ## Get Started
 
+### With docker
+
+```bash
+docker build . -t inno && docker run --rm inno
+```
+
+### Without docker
+
 1. Install dependencies
    ```
    pip install -r requirements.txt
